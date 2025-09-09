@@ -1,4 +1,57 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}Случайная цитата{% endblock %}
+
+{% block header %}🎲 Случайная цитата{% endblock %}
+
+{% block content %}
+{% if quote %}
+<div class="quote-card">
+    <p class="quote-text">"{{ quote.text }}"</p>
+    <p class="quote-source"><strong>Источник:</strong> {{ quote.source.name }} ({{ quote.source.get_type_display }})</p>
+    <p class="quote-source">Просмотров: {{ quote.views }}</p>
+    
+    <div class="quote-stats">
+        <button class="quote-btn" id="like-btn-{{ quote.id }}">👍 {{ quote.likes }}</button>
+        <button class="quote-btn" id="dislike-btn-{{ quote.id }}">👎 {{ quote.dislikes }}</button>
+    </div>
+</div>
+{% else %}
+<div class="quote-card">
+    <p class="quote-text">Пока нет цитат.</p>
+    <a href="{% url 'add_quote' %}" class="btn">Добавить первую</a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if quote %}
+<script>
+document.getElementById('like-btn-{{ quote.id }}').addEventListener('click', function() {
+    fetch('/like/{{ quote.id }}/')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            document.getElementById('like-btn-{{ quote.id }}').textContent = '👍 ' + data.likes;
+        });
+});
+
+document.getElementById('dislike-btn-{{ quote.id }}').addEventListener('click', function() {
+    fetch('/dislike/{{ quote.id }}/')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            document.getElementById('dislike-btn-{{ quote.id }}').textContent = '👎 ' + data.dislikes;
+        });
+});
+</script>
+{% endif %}
+{% endblock %}
+
+
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Случайная цитата</title>
@@ -47,4 +100,4 @@
     });
     </script>
 </body>
-</html>
+</html> -->

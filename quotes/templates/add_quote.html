@@ -1,44 +1,52 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-    <title>Добавить цитату</title>
-</head>
-<body>
-    <h1>Добавить новую цитату</h1>
-    
+{% extends 'base.html' %}
+
+{% block title %}Добавить цитату{% endblock %}
+
+{% block header %}➕ Добавить цитату{% endblock %}
+
+{% block content %}
+<div class="form-container">
     <form method="post">
         {% csrf_token %}
-        <p>
-            <label>Текст цитаты:</label><br>
-            <textarea name="text" required style="width: 300px; height: 100px;"></textarea>
-        </p>
         
-        <p>
-            <label>Источник (фильм/книга):</label><br>
-            <input type="text" name="source" required>
-        </p>
+        <div class="form-group">
+            <label>Текст цитаты:</label>
+            <textarea name="text" required placeholder="Введите текст цитаты..."></textarea>
+        </div>
         
-        <p>
-            <label>Тип источника:</label><br>
+        <div class="form-group">
+            <label>Источник (фильм/книга и т.д.):</label>
+            <input type="text" name="source" required placeholder="Название источника">
+        </div>
+        
+        <div class="form-group">
+            <label>Тип источника:</label>
             <select name="source_type">
-                <option value="movie">Фильм</option>
-                <option value="book">Книга</option>
-                <option value="other">Другое</option>
+                <option value="movie">🎬 Фильм</option>
+                <option value="series">📺 Сериал</option>
+                <option value="book">📚 Книга</option>
+                <option value="song">🎵 Песня</option>
+                <option value="game">🎮 Игра</option>
+                <option value="poem">📝 Стихотворение</option>
+                <option value="speech">🎤 Выступление</option>
+                <option value="social">📱 Соцсети</option>
+                <option value="proverb">💬 Пословица</option>
+                <option value="other">❓ Другое</option>
             </select>
-        </p>
+        </div>
         
-        <p>
-            <label>Вес (чем больше, тем чаще показывается):</label><br>
-            <input type="number" name="weight" value="1" min="1">
-        </p>
+        <div class="form-group">
+            <label>Вес (от 1 до 10, чем больше - тем чаще показывается):</label>
+            <input type="number" name="weight" value="1" min="1" max="10">
+        </div>
         
-        <button type="submit">Добавить</button>
+        <button type="submit" class="btn">Добавить цитату</button>
     </form>
-    
-    <a href="{% url 'random_quote' %}">Назад к цитатам</a>
-</body>
-</html> -->
+</div>
+{% endblock %}
 
+
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,11 +73,7 @@
         
         <p>
             <label>Тип источника:</label><br>
-            <!--<select name="source_type">
-                <option value="movie">Фильм</option>
-                <option value="book">Книга</option>
-                <option value="other">Другое</option>
-            </select>-->
+           
             <select name="source_type">
                 <option value="movie">🎬 Фильм</option>
                 <option value="series">📺 Сериал</option>
@@ -101,3 +105,4 @@
     <a href="{% url 'random_quote' %}">Назад к цитатам</a>
 </body>
 </html>
+-->

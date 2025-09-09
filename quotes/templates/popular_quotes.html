@@ -1,4 +1,29 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}Популярные цитаты{% endblock %}
+
+{% block header %}⭐ Популярные цитаты{% endblock %}
+
+{% block content %}
+{% for quote in quotes %}
+<div class="quote-card">
+    <p class="quote-text">"{{ quote.text }}"</p>
+    <p class="quote-source"><strong>Источник:</strong> {{ quote.source.name }} ({{ quote.source.get_type_display }})</p>
+    <div class="quote-stats">
+        <span>👍 {{ quote.likes }}</span>
+        <span>👎 {{ quote.dislikes }}</span>
+        <span>👀 {{ quote.views }}</span>
+        <span>⚖️ {{ quote.weight }}</span>
+    </div>
+</div>
+{% empty %}
+<div class="quote-card">
+    <p class="quote-text">Пока нет цитат.</p>
+</div>
+{% endfor %}
+{% endblock %}
+
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Популярные цитаты</title>
@@ -19,4 +44,4 @@
     <a href="{% url 'random_quote' %}">Назад к случайным цитатам</a>|
     <a href="{% url 'dashboard' %}">📊 Дашборд</a>
 </body>
-</html>
+</html> -->

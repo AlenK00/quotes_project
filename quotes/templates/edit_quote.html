@@ -1,4 +1,61 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}Изменить вес цитаты{% endblock %}
+
+{% block header %}✏️ Изменить вес цитаты{% endblock %}
+
+{% block content %}
+<div class="quote-card" style="max-width: 800px; margin: 0 auto;">
+    <p class="quote-text">"{{ quote.text }}"</p>
+    <p class="quote-source"><strong>Источник:</strong> {{ quote.source.name }} ({{ quote.source.get_type_display }})</p>
+    <div class="quote-stats">
+        <span>👍 {{ quote.likes }}</span>
+        <span>👎 {{ quote.dislikes }}</span>
+        <span>👀 {{ quote.views }}</span>
+        <span>⚖️ Текущий вес: {{ quote.weight }}</span>
+    </div>
+</div>
+
+<div class="form-container" style="max-width: 500px;">
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label>Новый вес (1-10):</label>
+            <input type="number" name="weight" value="{{ quote.weight }}" min="1" max="10" required>
+            <small style="color: #666; display: block; margin-top: 5px;">
+                Чем выше вес, тем чаще цитата будет показываться на главной странице
+            </small>
+        </div>
+        
+        <div style="display: flex; gap: 15px; justify-content: center;">
+            <button type="submit" class="btn">💾 Сохранить</button>
+            <a href="{% url 'dashboard' %}" class="btn" style="background: #6c757d;">❌ Отмена</a>
+        </div>
+    </form>
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+    <h3>📊 Как работает вес:</h3>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+        <div style="text-align: center;">
+            <div style="font-size: 2em; font-weight: bold; color: #667eea;">1</div>
+            <div>Редко</div>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 2em; font-weight: bold; color: #667eea;">5</div>
+            <div>Средне</div>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 2em; font-weight: bold; color: #667eea;">10</div>
+            <div>Часто</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Изменить вес цитаты</title>
@@ -22,4 +79,4 @@
         <a href="{% url 'dashboard' %}">Отмена</a>
     </form>
 </body>
-</html>
+</html> -->
