@@ -35,11 +35,24 @@
         <h3>🔍 Фильтры</h3>
         <form method="get">
             <label>Тип источника:
-                <select name="type">
+                <!--<select name="type">
                     <option value="">Все</option>
                     <option value="movie" {% if source_type == "movie" %}selected{% endif %}>Фильмы</option>
                     <option value="book" {% if source_type == "book" %}selected{% endif %}>Книги</option>
                     <option value="other" {% if source_type == "other" %}selected{% endif %}>Другое</option>
+                </select>-->
+                <select name="type">
+                    <option value="">Все</option>
+                    <option value="movie" {% if source_type == "movie" %}selected{% endif %}>🎬 Фильмы</option>
+                    <option value="series" {% if source_type == "series" %}selected{% endif %}>📺 Сериалы</option>
+                    <option value="book" {% if source_type == "book" %}selected{% endif %}>📚 Книги</option>
+                    <option value="song" {% if source_type == "song" %}selected{% endif %}>🎵 Песни</option>
+                    <option value="game" {% if source_type == "game" %}selected{% endif %}>🎮 Игры</option>
+                    <option value="poem" {% if source_type == "poem" %}selected{% endif %}>📝 Стихотворения</option>
+                    <option value="speech" {% if source_type == "speech" %}selected{% endif %}>🎤 Выступления</option>
+                    <option value="social" {% if source_type == "social" %}selected{% endif %}>📱 Соцсети</option>
+                    <option value="proverb" {% if source_type == "proverb" %}selected{% endif %}>💬 Пословицы</option>
+                    <option value="other" {% if source_type == "other" %}selected{% endif %}>❓ Другое</option>
                 </select>
             </label>
             

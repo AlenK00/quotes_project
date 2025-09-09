@@ -5,6 +5,25 @@ from django.core.exceptions import ValidationError
 class Source(models.Model):
     name = models.CharField(max_length=200, unique=True)
     type_choices = [
+        ('movie', '🎬 Фильм'),
+        ('series', '📺 Сериал'),
+        ('book', '📚 Книга'),
+        ('song', '🎵 Песня'),
+        ('game', '🎮 Игра'),
+        ('poem', '📝 Стихотворения'),
+        ('speech', '🎤 Выступление'),
+        ('social', '📱 Соцсети'),
+        ('proverb', '💬 Пословица'),
+        ('other', '❓ Другое'),
+    ]
+    type = models.CharField(max_length=10, choices=type_choices)
+    
+    def __str__(self):
+        return self.name
+
+"""class Source(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    type_choices = [
         ('movie', 'Фильм'),
         ('book', 'Книга'),
         ('other', 'Другое'),
@@ -12,7 +31,7 @@ class Source(models.Model):
     type = models.CharField(max_length=10, choices=type_choices)
     
     def __str__(self):
-        return self.name
+        return self.name"""
 
 class Quote(models.Model):
     text = models.TextField(unique=True)  # запрещает дубликаты
