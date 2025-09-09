@@ -12,8 +12,8 @@
         <p><strong>Источник:</strong> {{ quote.source.name }} ({{ quote.source.get_type_display }})</p>
         <p>Просмотров: {{ quote.views }}</p>
         
-        <button onclick="likeQuote({{ quote.id }})">👍 {{ quote.likes }}</button>
-        <button onclick="dislikeQuote({{ quote.id }})">👎 {{ quote.dislikes }}</button>
+        <button id="like-btn-{{ quote.id }}">👍 {{ quote.likes }}</button>
+        <button id="dislike-btn-{{ quote.id }}">👎 {{ quote.dislikes }}</button>
     </div>
     {% else %}
     <p>Пока нет цитат. <a href="{% url 'add_quote' %}">Добавить первую</a></p>
@@ -23,21 +23,27 @@
     <a href="{% url 'popular_quotes' %}">Популярные цитаты</a>
     
     <script>
-    function likeQuote(quoteId) {
-        fetch(`/like/${quoteId}/`)
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector(`button[onclick="likeQuote(${quoteId})"]`).textContent = `👍 ${data.likes}`;
+    // Функция для лайков
+    document.getElementById('like-btn-{{ quote.id }}').addEventListener('click', function() {
+        fetch('/like/{{ quote.id }}/')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                document.getElementById('like-btn-{{ quote.id }}').textContent = '👍 ' + data.likes;
             });
-    }
+    });
     
-    function dislikeQuote(quoteId) {
-        fetch(`/dislike/${quoteId}/`)
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector(`button[onclick="dislikeQuote(${quoteId})"]`).textContent = `👎 ${data.dislikes}`;
+    // Функция для дизлайков
+    document.getElementById('dislike-btn-{{ quote.id }}').addEventListener('click', function() {
+        fetch('/dislike/{{ quote.id }}/')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                document.getElementById('dislike-btn-{{ quote.id }}').textContent = '👎 ' + data.dislikes;
             });
-    }
+    });
     </script>
 </body>
 </html>
