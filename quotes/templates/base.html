@@ -281,7 +281,7 @@
             <h1>{% block header %}📚 Цитатник{% endblock %}</h1>
         </header>
 
-        {% if request.path == '/dashboard/' %}
+        {% if request.path == '/dashboard/' or request.path == '/popular/' %}
         <div class="navigation">
             <a href="{% url 'random_quote' %}">🎲 Случайная цитата</a>
             <a href="{% url 'add_quote' %}">➕ Добавить цитату</a>
