@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Изменить вес цитаты</title>
+</head>
+<body>
+    <h1>Изменить вес цитаты</h1>
+    
+    <div style="border: 1px solid #ccc; padding: 20px; margin: 20px;">
+        <p>"{{ quote.text }}"</p>
+        <p><strong>Источник:</strong> {{ quote.source.name }}</p>
+        <p>Текущий вес: {{ quote.weight }}</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <label>Новый вес (чем больше, тем чаще показывается):
+            <input type="number" name="weight" value="{{ quote.weight }}" min="1" required>
+        </label>
+        <br><br>
+        <button type="submit">Сохранить</button>
+        <a href="{% url 'dashboard' %}">Отмена</a>
+    </form>
+</body>
+</html>
