@@ -62,10 +62,6 @@
             <textarea name="text" required style="width: 300px; height: 100px;"></textarea>
         </p>
         
-        <p>
-            <label>Источник (фильм/книга):</label><br>
-            <input type="text" name="source" required>
-        </p>
         
         <p>
             <label>Тип источника:</label><br>
@@ -89,8 +85,14 @@
         </p>
         
         <p>
-            <label>Вес (чем больше, тем чаще показывается):</label><br>
-            <input type="number" name="weight" value="1" min="1">
+            <label>Название источника (фильма/книги и др.):</label><br>
+            <input type="text" name="source" required>
+        </p>
+
+        <p>
+            <label>Вес (установи в диапазоне от 1 до 10, где 1 - это минимальный вес, 10 - максимальный):</label><br>
+            <input type="number" name="weight" value="1" min="1" max="10">
+
         </p>
         
         <button type="submit">Добавить</button>

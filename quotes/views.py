@@ -136,7 +136,7 @@ def dashboard(request):
     
     # Самые популярные источники
     popular_sources = Source.objects.annotate(
-        total_quotes=models.models.Count('quote'),
+        total_quotes=models.Count('quote'),
         total_likes=models.Sum('quote__likes')
     ).order_by('-total_likes')[:5]
     
@@ -166,6 +166,46 @@ def dashboard(request):
     }
     
     return render(request, 'dashboard.html', context)
+
+"""def dashboard(request):
+    # Статистика для дашборда
+    total_quotes = Quote.objects.count()
+    total_sources = Source.objects.count()
+    total_views = sum(quote.views for quote in Quote.objects.all())
+    total_likes = sum(quote.likes for quote in Quote.objects.all())
+    
+    # Самые популярные источники
+    popular_sources = Source.objects.annotate(
+        total_quotes=models.models.Count('quote'),
+        total_likes=models.Sum('quote__likes')
+    ).order_by('-total_likes')[:5]
+    
+    # Фильтрация
+    source_type = request.GET.get('type', '')
+    min_likes = request.GET.get('min_likes', 0)
+    
+    filtered_quotes = Quote.objects.all()
+    
+    if source_type:
+        filtered_quotes = filtered_quotes.filter(source__type=source_type)
+    
+    if min_likes:
+        filtered_quotes = filtered_quotes.filter(likes__gte=int(min_likes))
+    
+    filtered_quotes = filtered_quotes.order_by('-likes')[:20]
+    
+    context = {
+        'total_quotes': total_quotes,
+        'total_sources': total_sources,
+        'total_views': total_views,
+        'total_likes': total_likes,
+        'popular_sources': popular_sources,
+        'filtered_quotes': filtered_quotes,
+        'source_type': source_type,
+        'min_likes': min_likes,
+    }
+    
+    return render(request, 'dashboard.html', context)"""
 
 def edit_quote(request, quote_id):
     quote = get_object_or_404(Quote, id=quote_id)

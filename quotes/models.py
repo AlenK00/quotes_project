@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Source(models.Model):
     name = models.CharField(max_length=200, unique=True)
@@ -36,7 +37,7 @@ class Source(models.Model):
 class Quote(models.Model):
     text = models.TextField(unique=True)  # запрещает дубликаты
     source = models.ForeignKey(Source, on_delete=models.CASCADE)
-    weight = models.IntegerField(default=1)  # вес цитаты
+    weight = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])  # вес цитаты
     views = models.IntegerField(default=0)   # счетчик просмотров
     likes = models.IntegerField(default=0)   # лайки
     dislikes = models.IntegerField(default=0) # дизлайки
