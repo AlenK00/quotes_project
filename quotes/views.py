@@ -54,6 +54,8 @@ def popular_quotes(request):
     quotes = Quote.objects.all().order_by('-likes')[:10]
     return render(request, 'popular_quotes.html', {'quotes': quotes})"""
 
+from django.db import models  # ← ДОБАВЬ ЭТУ СТРОЧКУ!
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib import messages
@@ -134,7 +136,7 @@ def dashboard(request):
     
     # Самые популярные источники
     popular_sources = Source.objects.annotate(
-        total_quotes=models.Count('quote'),
+        total_quotes=models.models.Count('quote'),
         total_likes=models.Sum('quote__likes')
     ).order_by('-total_likes')[:5]
     
